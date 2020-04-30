@@ -1,8 +1,10 @@
+require("dotenv").config()
+
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Default Starter`,
-    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
-    author: `@gatsbyjs`,
+    title: `Beans.to`,
+    description: `Toronto coffee roasters with beans available for home brewing`,
+    author: `Mark Allen`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -11,6 +13,24 @@ module.exports = {
       options: {
         name: `images`,
         path: `${__dirname}/src/images`,
+      },
+    },
+    {
+      resolve: `gatsby-source-contentful`,
+      options: {
+        spaceId: `${process.env.CONTENTFUL_SPACE_ID}`,
+        accessToken: `${process.env.CONTENTFUL_ACCESS_TOKEN}`,
+        host: `${process.env.CONTENTFUL_HOST}`,
+        downloadLocal: true,
+        pageLimit: 100
+      },
+    },
+    {
+      resolve: `gatsby-plugin-web-font-loader`,
+      options: {
+        google: {
+          families: ['Lato']
+        }
       },
     },
     `gatsby-transformer-sharp`,
