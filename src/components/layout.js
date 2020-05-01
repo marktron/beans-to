@@ -7,6 +7,7 @@ import styled, {
   ThemeProvider,
 } from "styled-components/macro"
 import "normalize.css"
+import "../components/fontawesome"
 import { BaseTheme } from "../components/theme"
 
 // import "../components/fontawesome"
@@ -27,6 +28,9 @@ const GlobalStyle = createGlobalStyle`
   }
   h1{
     font-weight: ${props => props.theme.fontWeights.black};
+  }
+  a {
+    text-decoration: none;
   }
   `
 

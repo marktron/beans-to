@@ -3,17 +3,23 @@ import { Link, graphql } from "gatsby"
 import styled from "styled-components/macro"
 
 import Layout from "../components/layout"
+import Listing from "../components/listing"
 import SEO from "../components/seo"
+
+const ListingsContainer = styled.div`
+  max-width: 70ch;
+  margin: 0 auto;
+`
 
 const IndexPage = ({ data }) => {
   return (
     <Layout>
       <SEO title="Home" />
-      <h1>Hi people</h1>
-      {data.allContentfulBusiness.edges.map(business => {
-        console.log("🔔 ",business.node)
-        return business.node.name
-      })}
+      <ListingsContainer>
+        {data.allContentfulBusiness.edges.map(business => {
+          return <Listing key={business.node.slug} business={business.node} />
+        })}
+      </ListingsContainer>
     </Layout>
   )
 }
@@ -35,13 +41,16 @@ export const query = graphql`
           logo {
             localFile {
               childImageSharp {
-                fixed(width: 200) {
+                fixed(width: 100) {
                   base64
                   tracedSVG
                   aspectRatio
                   srcWebp
                   srcSetWebp
-                  originalName
+                  src
+                  srcSet
+                  height
+                  width
                 }
               }
             }
