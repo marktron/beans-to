@@ -1,11 +1,36 @@
 import React, { useState } from "react"
 import { graphql } from "gatsby"
-import styled from "styled-components/macro"
+import styled, {
+  createGlobalStyle,
+  ThemeProvider,
+} from "styled-components/macro"
 import chroma from "chroma-js"
+import "normalize.css"
+import "../components/fontawesome"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { BaseTheme } from "../components/theme"
 import Layout from "../components/layout"
 import Listing from "../components/listing"
 import SEO from "../components/seo"
+
+const GlobalStyle = createGlobalStyle`
+  body, html {
+    line-height: 1.45;
+    font-size: 16px;
+    line-height: 1.45;
+    font-family: ${props => props.theme.fonts.sansSerif};
+    background-color: ${props => props.theme.colors.background};
+    font-weight: ${props => props.theme.fontWeights.normal};
+    color: ${props => props.theme.colors.text};
+  }
+  h1, h2, h3, h4, h5, h6{
+    font-weight: ${props => props.theme.fontWeights.black};
+    font-family: ${props => props.theme.fonts.headline};
+  }
+  a {
+    text-decoration: none;
+  }
+  `
 
 const ListingsContainer = styled.div`
   padding: 1rem;
@@ -80,6 +105,8 @@ const FilterTag = styled.span`
 const IndexPage = ({ data }) => {
   const [activeTags, setActiveTags] = useState([])
   return (
+    <ThemeProvider theme={BaseTheme.dark}>
+      <GlobalStyle />
     <Layout>
       <SEO title="Home" />
       <ListingsContainer>
@@ -147,6 +174,7 @@ const IndexPage = ({ data }) => {
         })}
       </ListingsContainer>
     </Layout>
+    </ThemeProvider>
   )
 }
 
