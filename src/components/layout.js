@@ -1,9 +1,33 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
-import styled from "styled-components/macro"
-
+import styled, {
+  createGlobalStyle,
+  ThemeProvider,
+} from "styled-components/macro"
+import "normalize.css"
+import "../components/fontawesome"
+import { BaseTheme } from "../components/theme"
 import Header from "./header"
+
+const GlobalStyle = createGlobalStyle`
+  body, html {
+    line-height: 1.45;
+    font-size: 16px;
+    line-height: 1.45;
+    font-family: ${props => props.theme.fonts.sansSerif};
+    background-color: ${props => props.theme.colors.background};
+    font-weight: ${props => props.theme.fontWeights.normal};
+    color: ${props => props.theme.colors.text};
+  }
+  h1, h2, h3, h4, h5, h6{
+    font-weight: ${props => props.theme.fontWeights.black};
+    font-family: ${props => props.theme.fonts.headline};
+  }
+  a {
+    text-decoration: none;
+  }
+  `
 
 const StyledLayout = styled.div`
   display: flex;
@@ -39,10 +63,13 @@ const Layout = ({ children }) => {
   `)
 
   return (
+    <ThemeProvider theme={BaseTheme.dark}>
+      <GlobalStyle />
       <StyledLayout>
         <Header siteTitle={data.site.siteMetadata.title} />
         <StyledMain>{children}</StyledMain>
       </StyledLayout>
+    </ThemeProvider>
   )
 }
 

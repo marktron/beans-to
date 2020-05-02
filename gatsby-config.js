@@ -31,9 +31,11 @@ module.exports = {
         typekit: {
           id: `hzr7pqg`,
         }
-        // google: {
-        //   families: ['Archivo+Narrow:700', 'Archivo:400']
-        // }
+      },
+    },
+    {
+      resolve: `gatsby-plugin-styled-components`,
+      options: {
       },
     },
     `gatsby-transformer-sharp`,
