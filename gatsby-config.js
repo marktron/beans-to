@@ -28,9 +28,12 @@ module.exports = {
     {
       resolve: `gatsby-plugin-web-font-loader`,
       options: {
-        google: {
-          families: ['Lato:300,400,700,900']
+        typekit: {
+          id: `hzr7pqg`,
         }
+        // google: {
+        //   families: ['Archivo+Narrow:700', 'Archivo:400']
+        // }
       },
     },
     `gatsby-transformer-sharp`,

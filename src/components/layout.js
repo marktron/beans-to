@@ -1,7 +1,6 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
-import { Link } from "gatsby"
 import styled, {
   createGlobalStyle,
   ThemeProvider,
@@ -9,9 +8,6 @@ import styled, {
 import "normalize.css"
 import "../components/fontawesome"
 import { BaseTheme } from "../components/theme"
-
-// import "../components/fontawesome"
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 import Header from "./header"
 
@@ -23,11 +19,11 @@ const GlobalStyle = createGlobalStyle`
     font-family: ${props => props.theme.fonts.sansSerif};
     background-color: ${props => props.theme.colors.background};
     font-weight: ${props => props.theme.fontWeights.normal};
-    background-color: ${props => props.theme.colors.background};
     color: ${props => props.theme.colors.text};
   }
-  h1{
+  h1, h2, h3, h4, h5, h6{
     font-weight: ${props => props.theme.fontWeights.black};
+    font-family: ${props => props.theme.fonts.headline};
   }
   a {
     text-decoration: none;
@@ -37,38 +33,22 @@ const GlobalStyle = createGlobalStyle`
 const StyledLayout = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  align-content: stretch;
-  align-items: stretch;
-  min-height: 100vh;
+
+  @media ${props => props.theme.screenSizes.tablet} {
+    flex-direction: row;
+    height: 100vh;
+    overflow-y: scroll;
+    justify-content: space-between;
+    align-content: stretch;
+    align-items: stretch;
+  }
 `
 
 const StyledMain = styled.main`
-  padding: 2rem;
-  flex-grow: 1;
-  padding-top: 0;
-`
-
-const StyledFooter = styled.footer`
-  padding: 1rem;
-  color: ${props => props.theme.colors.grays[3]};
-  font-size: ${props => props.theme.fontSizes[1]};
-  display: flex;
-  flex-direction: column-reverse;
-  justify-content: space-between;
-  align-items: center;
-  a {
-    font-weight: ${props => props.theme.fontWeights.bold};
-    color: ${props => props.theme.colors.grays[3]};
-    text-decoration: none;
-    &:hover {
-      transition: color 0.2s ease, border 0.2s ease;
-      color: ${props => props.theme.colors.text};
-      border-bottom: solid 2px ${props => props.theme.colors.text};
-    }
-  }
   @media ${props => props.theme.screenSizes.tablet} {
-    flex-direction: row;
+    width: 50%;
+    height: 100vh;
+    overflow-y: scroll;
   }
 `
 
@@ -89,13 +69,13 @@ const Layout = ({ children }) => {
       <StyledLayout>
         <Header siteTitle={data.site.siteMetadata.title} />
         <StyledMain>{children}</StyledMain>
-        <StyledFooter>
+        {/* <StyledFooter>
           <span>
             © {new Date().getFullYear()}, Built with
             {` `}
             <a href="https://www.gatsbyjs.org">Gatsby</a>
           </span>
-        </StyledFooter>
+        </StyledFooter> */}
       </StyledLayout>
     </ThemeProvider>
   )

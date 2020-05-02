@@ -4,12 +4,33 @@ import { library } from "@fortawesome/fontawesome-svg-core"
 import {} from "@fortawesome/pro-solid-svg-icons"
 
 // Regular weight icons
-import {} from "@fortawesome/pro-regular-svg-icons"
+import {
+  faBoxAlt,
+  faLink,
+  faCoffeeTogo,
+  faMapMarkerAlt,
+  faPhone,
+  faStoreAlt,
+} from "@fortawesome/pro-regular-svg-icons"
 
 // Light weight icons
-import { faMapMarkerAlt, faPhone } from "@fortawesome/pro-light-svg-icons"
+import {} from "@fortawesome/pro-light-svg-icons"
 
 // Brand icons
-import {} from "@fortawesome/free-brands-svg-icons"
+import {
+  faFacebookSquare,
+  faInstagram,
+  faTwitter,
+} from "@fortawesome/free-brands-svg-icons"
 
-library.add(faMapMarkerAlt, faPhone)
+library.add(
+  faBoxAlt,
+  faLink,
+  faCoffeeTogo,
+  faFacebookSquare,
+  faInstagram,
+  faMapMarkerAlt,
+  faPhone,
+  faStoreAlt,
+  faTwitter
+)

@@ -38,7 +38,7 @@ const colors = {
     text: "rgb(233,233,233)",
     textMuted: "rgba(233,233,233, 0.75)",
     headlines: "rgb(233,233,233)",
-    linkColor: "rgb(221,54,17)",
+    linkColor: "rgb(167,165,165)",
     // linkUnderlineColor: "rgba(9,179,179,0.33)",
     // modalBackground: "rgb(51,51,51)"
   }
@@ -63,28 +63,28 @@ const screenSizes = {
   desktopL: `(min-width: ${size.desktop})`
 };
 const fonts = {
-  sansSerif: "lato, Helvetica, Arial, sans-serif",
+  sansSerif: "aktiv-grotesk-condensed, Helvetica, Arial, sans-serif",
   serif: 'Georgia, Times, "Times New Roman", serif',
   monoSpace: 'Consolas, monaco, monospace',
-  headline: 'lato, sans-serif'
+  headline: 'aktiv-grotesk, sans-serif'
 };
 
 const fontSizes = [
-  "0.64rem",
-  "0.8rem",
+  "0.563rem",
+  "0.75rem",
   "1rem",
-  "1.25rem",
-  "1.563rem",
-  "1.953rem",
-  "2.441rem",
-  "3.052rem"
+  "1.333rem",
+  "1.777rem",
+  "2.369rem",
+  "3.157rem",
+  "4.209rem"
 ];
 
 const fontWeights = {
-  light: "300",
+  light: "400",
   normal: "400",
-  bold: "700",
-  black: "900"
+  bold: "800",
+  black: "800"
 };
 
 export const BaseTheme = {

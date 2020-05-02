@@ -2,42 +2,108 @@ import React from "react"
 import PropTypes from "prop-types"
 import styled from "styled-components/macro"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-
 import Img from "gatsby-image"
+import chroma from "chroma-js"
+
+import Tags from "../components/tags"
+import SocialLinks from "../components/social-links"
+
+const SocialLinksWrapper = styled.div``
 
 const ListingWrapper = styled.div`
   display: flex;
-  flex-direction: row;
-  margin-top: 2rem;
-  align-items: center;
-  border-bottom: solid 1px rgba(255, 255, 255, 0.25);
+  flex-direction: column;
+  padding-top: 2rem;
+  align-items: flex-start;
+  border-bottom: ${props =>
+    `solid 1px ${chroma(props.theme.colors.linkColor).alpha(0.5)}`};
   padding-bottom: 2rem;
+  ${SocialLinksWrapper} {
+    transition: opacity 0.2s ease;
+    opacity: 1;
+  }
   &:last-child {
     border-bottom: none;
   }
+  &:hover {
+    ${SocialLinksWrapper} {
+      opacity: 1;
+    }
+  }
+  @media ${props => props.theme.screenSizes.tablet} {
+    flex-direction: row;
+    ${SocialLinksWrapper} {
+      opacity: 0;
+    }
+  }
 `
 const ImgWrapper = styled.a`
-  margin-right: 1rem;
+  margin: 0 auto 1rem auto;
   line-height: 0;
 
   img {
     border-radius: 0.25rem;
+  }
+
+  @media ${props => props.theme.screenSizes.tablet} {
+    margin: 0 2rem 0 0;
   }
 `
 const BizInfo = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  flex-grow: 1;
+  width: 100%;
 `
 
+const ListingHeader = styled.h3`
+  font-size: ${props => props.theme.fontSizes[3]};
+  font-family: ${props => props.theme.fonts.headline};
+  margin: 0 0 1rem 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  
+  @media ${props => props.theme.screenSizes.tablet} {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+`
 const Name = styled.a`
   color: ${props => props.theme.colors.text};
-  font-size: ${props => props.theme.fontSizes[4]};
-  font-weight: ${props => props.theme.fontWeights.black};
-  margin-bottom:1rem;
+  line-height: 1;
+  @media ${props => props.theme.screenSizes.tablet} {
+    &::after {
+    content: "";
+    opacity: 0;
+    margin-left: 0.5rem;
+    transition: opacity 0.2s ease;
+  }
+  &:hover {
+    &::after {
+      content: "⟶";
+      opacity: 1;
+    }
+  }
+  }
 `
 const Address = styled.a`
-  color: ${props => props.theme.colors.text};
+  color: ${props => props.theme.colors.linkColor};
+  margin-bottom: 0.5rem;
+  svg {
+    margin-right: 0.1rem;
+    opacity: 0.75;
+    transition: opacity 0.2s ease;
+  }
+  &:hover {
+    color: ${props => props.theme.colors.text};
+    svg {
+      opacity: 1;
+    }
+  }
 `
 
 const Listing = props => {
@@ -48,13 +114,24 @@ const Listing = props => {
         href={business.website}
         target="_blank"
         rel="noopener noreferrer"
+        title={`${business.name}’s website`}
       >
         <Img fixed={business.logo.localFile.childImageSharp.fixed} />
       </ImgWrapper>
       <BizInfo>
-        <Name href={business.website} target="_blank" rel="noopener noreferrer">
-          {business.name}
-        </Name>
+        <ListingHeader>
+          <Name
+            href={business.website}
+            target="_blank"
+            rel="noopener noreferrer"
+            title={`${business.name}’s website`}
+          >
+            {business.name}
+          </Name>
+          <SocialLinksWrapper>
+            <SocialLinks business={business} />
+          </SocialLinksWrapper>
+        </ListingHeader>
         {business.address && (
           <Address
             href={`https://www.google.ca/maps/place/${encodeURI(
@@ -62,8 +139,9 @@ const Listing = props => {
             ).replace(/%20/g, "+")}`}
             target="_blank"
             rel="noopener noreferrer"
+            title={`Directions to ${business.name}`}
           >
-            <FontAwesomeIcon icon={["fal", "map-marker-alt"]} />{" "}
+            <FontAwesomeIcon icon={["far", "map-marker-alt"]} fixedWidth />{" "}
             {business.address}
           </Address>
         )}
@@ -72,10 +150,13 @@ const Listing = props => {
             href={`tel:${business.phone.replace(/ /g, "-")}`}
             target="_blank"
             rel="noopener noreferrer"
+            title={`Call ${business.name}`}
           >
-            <FontAwesomeIcon icon={["fal", "phone"]} /> {business.phone}
+            <FontAwesomeIcon icon={["far", "phone"]} fixedWidth />{" "}
+            {business.phone}
           </Address>
         )}
+        {business.tags && <Tags tags={business.tags} />}
       </BizInfo>
     </ListingWrapper>
   )
