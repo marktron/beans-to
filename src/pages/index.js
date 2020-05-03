@@ -10,7 +10,7 @@ import SEO from "../components/seo"
 const ListingsContainer = styled.div`
   padding: 1rem;
   @media ${props => props.theme.screenSizes.tablet} {
-    padding: 2rem;
+    padding: 4rem;
   }
 `
 
@@ -21,6 +21,7 @@ const IntroTitle = styled.h1`
 
 const IntroText = styled.p`
   font-size: ${props => props.theme.fontSizes[3]};
+  margin: 2rem 0;
 `
 
 const FilterWrapper = styled.div`
@@ -29,6 +30,8 @@ const FilterWrapper = styled.div`
   h3 {
     margin: 0;
     margin-right: 1rem;
+    font-family: ${props => props.theme.fonts.sansSerif};
+    font-weight: ${props => props.theme.fontWeights.normal};
   }
   ul {
     list-style: none;
@@ -44,7 +47,7 @@ const FilterWrapper = styled.div`
     }
   }
   @media ${props => props.theme.screenSizes.tablet} {
-    padding: 1rem 0 0.5rem 0;  
+    padding: 1rem 0 1.5rem 0;
     ul {
       flex-direction: row;
     }
@@ -52,8 +55,7 @@ const FilterWrapper = styled.div`
 `
 
 const FilterTag = styled.span`
-  border: ${props =>
-    `solid 1px ${chroma(props.theme.colors.text).alpha(0.5)}`};
+  border: ${props => `solid 1px ${chroma(props.theme.colors.text).alpha(0.5)}`};
   border-radius: 4px;
   padding: 0.5rem;
   margin-right: 0.5rem;
@@ -71,25 +73,29 @@ const FilterTag = styled.span`
     border-color: ${props => props.theme.colors.text};
     color: ${props => props.theme.colors.background};
     &:hover {
-    background-color: ${props => chroma(props.theme.colors.text)};
+      background-color: ${props => chroma(props.theme.colors.text)};
+    }
   }
-  }
-  
 `
 
 const IndexPage = ({ data }) => {
   const [activeTags, setActiveTags] = useState([])
   return (
     <Layout>
-      <SEO title="Home" />
+      <SEO
+        title={
+          data.site?.siteMetadata?.description
+            ? data.site.siteMetadata.description
+            : "Home"
+        }
+      />
       <ListingsContainer>
         <IntroTitle>Toronto Coffee Roasters</IntroTitle>
         <IntroText>
-          Do you miss your favorite local cafe? Many Toronto-area coffee
+          Do you miss your favourite local cafe? Many Toronto-area coffee
           roasters are still selling beans, with options for contactless pickup
           or shipping directly to your home.
         </IntroText>
-        {/* {shippingTags.map(shippingTag => (<div>{ shippingTag }</div>))} */}
         <FilterWrapper>
           <ul>
             <li>
@@ -183,6 +189,11 @@ export const query = graphql`
             }
           }
         }
+      }
+    }
+    site {
+      siteMetadata {
+        description
       }
     }
   }

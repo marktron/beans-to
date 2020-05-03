@@ -51,6 +51,7 @@ const StyledLogo = styled.span`
     /* margin: 2rem; */
     img {
       height: auto;
+      max-height: 350px;
     }
   }
 `

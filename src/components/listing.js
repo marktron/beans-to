@@ -13,11 +13,10 @@ const SocialLinksWrapper = styled.div``
 const ListingWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  padding-top: 2rem;
+  padding: 2rem 0;
   align-items: flex-start;
   border-bottom: ${props =>
     `solid 1px ${chroma(props.theme.colors.linkColor).alpha(0.5)}`};
-  padding-bottom: 2rem;
   ${SocialLinksWrapper} {
     transition: opacity 0.2s ease;
     opacity: 1;
@@ -32,6 +31,7 @@ const ListingWrapper = styled.div`
   }
   @media ${props => props.theme.screenSizes.tablet} {
     flex-direction: row;
+    padding: 3rem 0;
     ${SocialLinksWrapper} {
       opacity: 0;
     }

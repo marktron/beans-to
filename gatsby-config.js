@@ -5,6 +5,7 @@ module.exports = {
     title: `Beans.to`,
     description: `Toronto coffee roasters with beans available for home brewing`,
     author: `Mark Allen`,
+    image: `/opengraph-image.png`
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -41,15 +42,21 @@ module.exports = {
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     {
+      resolve: `gatsby-plugin-google-analytics`,
+      options: {
+        trackingId: `UA-165380319-1`,
+      },
+    },
+    {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `gatsby-starter-default`,
-        short_name: `starter`,
+        name: `beans-to`,
+        short_name: `beans`,
         start_url: `/`,
-        background_color: `#663399`,
-        theme_color: `#663399`,
+        background_color: `#1B1918`,
+        theme_color: `#1B1918`,
         display: `minimal-ui`,
-        icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
+        icon: `src/images/favicon.png`, // This path is relative to the root of the site.
       },
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality
