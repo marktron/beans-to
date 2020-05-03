@@ -6,9 +6,13 @@ import styled, {
   ThemeProvider,
 } from "styled-components/macro"
 import "normalize.css"
+import { config } from "@fortawesome/fontawesome-svg-core";
 import "../components/fontawesome"
 import { BaseTheme } from "../components/theme"
 import Header from "./header"
+
+// This prevents FontAwesome icons from loading at a huge size, then shrinking (see also gatsby-browser.js)
+config.autoAddCss = false;
 
 const GlobalStyle = createGlobalStyle`
   body, html {
