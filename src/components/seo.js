@@ -4,7 +4,6 @@
  *
  * See: https://www.gatsbyjs.org/docs/use-static-query/
  */
-
 import React from "react"
 import PropTypes from "prop-types"
 import { Helmet } from "react-helmet"
@@ -50,7 +49,7 @@ function SEO({ description, lang, meta, title }) {
         },
         {
           property: `og:image`,
-          content: site.siteMetadata.image,
+          content: `${process.env.GATSBY_SITE_URL}/social-image.png`,
         },
         {
           property: `og:type`,
@@ -74,7 +73,7 @@ function SEO({ description, lang, meta, title }) {
         },
         {
           property: `twitter:image`,
-          content: site.siteMetadata.image,
+          content: `${process.env.GATSBY_SITE_URL}/social-image.png`,
         },
       ].concat(meta)}
     />
