@@ -97,6 +97,9 @@ const FilterTag = styled.span`
   svg {
     margin-right: 0.5rem;
   }
+  &:last-child {
+    margin-right: 0;
+  }
   &:hover {
     background-color: ${props => chroma(props.theme.colors.text).alpha(0.1)};
     border: ${props =>
