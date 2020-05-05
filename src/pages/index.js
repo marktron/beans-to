@@ -15,8 +15,12 @@ const ListingsContainer = styled.div`
 `
 
 const IntroTitle = styled.h1`
-  margin-top: 0;
+  margin-top: 2rem;
   text-align: center;
+  line-height: 1.2;
+  @media ${props => props.theme.screenSizes.tablet} {
+    margin-top: 0;
+  }
 `
 
 const IntroText = styled.p`
@@ -158,7 +162,7 @@ const IndexPage = ({ data }) => {
 
 export const query = graphql`
   query {
-    allContentfulBusiness(sort: { order: DESC, fields: createdAt }) {
+    allContentfulBusiness(sort: { order: ASC, fields: createdAt }) {
       edges {
         node {
           id
@@ -169,6 +173,9 @@ export const query = graphql`
           instagram
           facebook
           website
+          note {
+            note
+          }
           tags
           phone
           logo {

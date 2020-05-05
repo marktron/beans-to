@@ -66,7 +66,7 @@ const ListingHeader = styled.h3`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  
+
   @media ${props => props.theme.screenSizes.tablet} {
     flex-direction: row;
     justify-content: space-between;
@@ -77,19 +77,24 @@ const Name = styled.a`
   line-height: 1;
   @media ${props => props.theme.screenSizes.tablet} {
     &::after {
-    content: "";
-    opacity: 0;
-    margin-left: 0.5rem;
-    transition: opacity 0.2s ease;
-  }
-  &:hover {
-    &::after {
-      content: "⟶";
-      opacity: 1;
+      content: "";
+      opacity: 0;
+      margin-left: 0.5rem;
+      transition: opacity 0.2s ease;
+    }
+    &:hover {
+      &::after {
+        content: "⟶";
+        opacity: 1;
+      }
     }
   }
-  }
 `
+const Note = styled.p`
+  margin-top: 0;
+  color: ${props => props.theme.colors.linkColor};
+`
+
 const Address = styled.a`
   color: ${props => props.theme.colors.linkColor};
   margin-bottom: 0.5rem;
@@ -132,6 +137,7 @@ const Listing = props => {
             <SocialLinks business={business} />
           </SocialLinksWrapper>
         </ListingHeader>
+        {business.note?.note && (<Note>{business.note.note}</Note>)}
         {business.address && (
           <Address
             href={`https://www.google.ca/maps/place/${encodeURI(
