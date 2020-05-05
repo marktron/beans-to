@@ -10,7 +10,7 @@ import SEO from "../components/seo"
 const ListingsContainer = styled.div`
   padding: 1rem;
   @media ${props => props.theme.screenSizes.tablet} {
-    padding: 4rem;
+    padding: 3rem 4rem;
   }
 `
 
@@ -23,9 +23,20 @@ const IntroTitle = styled.h1`
   }
 `
 
-const IntroText = styled.p`
+const BodyCopy = styled.p`
   font-size: ${props => props.theme.fontSizes[3]};
   margin: 2rem 0;
+
+  a {
+    color: ${props => props.theme.colors.linkColor};
+    border-bottom: ${props =>
+      `solid 2px ${chroma(props.theme.colors.linkColor).alpha(0.5)}`};
+    transition: color 0.2s ease, border-color 0.2s ease;
+    &:hover {
+      color: ${props => props.theme.colors.text};
+      border-bottom: ${props => `solid 1px ${props.theme.colors.text}`};
+    }
+  }
 `
 
 const ToggleFilterButton = styled.button`
@@ -43,7 +54,8 @@ const ToggleFilterButton = styled.button`
 `
 
 const FilterWrapper = styled.div`
-  border: ${props => `solid 2px ${props.theme.colors.text}`};
+  border: ${props =>
+    `solid 2px ${chroma(props.theme.colors.linkColor).alpha(0.5)}`};
   border-radius: 2px;
   padding: 1rem 0;
   text-align: center;
@@ -51,9 +63,6 @@ const FilterWrapper = styled.div`
   h3 {
     margin: 0;
     margin-bottom: 0.5rem;
-    /* font-family: ${props => props.theme.fonts.sansSerif}; */
-    /* font-size: ${props => props.theme.fontSizes[3]}; */
-    /* font-weight: ${props => props.theme.fontWeights.normal}; */
   }
   ul {
     list-style: none;
@@ -90,6 +99,8 @@ const FilterTag = styled.span`
   }
   &:hover {
     background-color: ${props => chroma(props.theme.colors.text).alpha(0.1)};
+    border: ${props =>
+      `solid 1px ${chroma(props.theme.colors.text).alpha(0.75)}`};
   }
   &.activeTag {
     background-color: ${props => props.theme.colors.text};
@@ -98,6 +109,21 @@ const FilterTag = styled.span`
     &:hover {
       background-color: ${props => chroma(props.theme.colors.text)};
     }
+  }
+`
+
+const ContactButton = styled.a`
+  border: ${props => `solid 2px ${props.theme.colors.linkColor}`};
+  color: ${props => props.theme.colors.linkColor};
+  border-radius: 4px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  margin: 0 auto;
+  transition: color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+  &:hover {
+    border: ${props => `solid 2px ${props.theme.colors.text}`};
+    color: ${props => props.theme.colors.background};
+    background-color: ${props => props.theme.colors.text};
   }
 `
 
@@ -115,9 +141,12 @@ const IndexPage = ({ data }) => {
       />
       <ListingsContainer>
         <IntroTitle>Toronto Coffee Roasters</IntroTitle>
-        <IntroText>
-        Are you missing your favourite local cafe? Many independent Toronto coffee roasters are still operating, now with options for contactless pickup or shipping directly to your home. It’s a great way to support local businesses and add a little variety to your day.
-        </IntroText>
+        <BodyCopy>
+          Missing your favourite local cafe? Many independent Toronto area
+          coffee roasters are still operating, now with options for contactless
+          pickup or shipping directly to your home. It’s a great way to support
+          local businesses and add a little variety to your day.
+        </BodyCopy>
         {!filterVisible && (
           <ToggleFilterButton onClick={() => toggleFilterVisible(true)}>
             Show Shipping Filters
@@ -176,6 +205,18 @@ const IndexPage = ({ data }) => {
             return <Listing key={business.node.slug} business={business.node} />
           } else return null
         })}
+        <BodyCopy>
+          Need help getting that expertly crafted barista brew at home?{" "}
+          <a
+            href="https://ineedcoffee.com/coffee-brewing-guide"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            I Need Coffee
+          </a>{" "}
+          has guidelines for every method you can think of.
+        </BodyCopy>
+        <ContactButton href="mailto:mark@markallen.io?subject=Beans.to%20Suggestion">Suggest a Toronto coffee roaster</ContactButton>
       </ListingsContainer>
     </Layout>
   )
