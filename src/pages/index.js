@@ -28,14 +28,32 @@ const IntroText = styled.p`
   margin: 2rem 0;
 `
 
+const ToggleFilterButton = styled.button`
+  border: ${props => `solid 2px ${props.theme.colors.text}`};
+  background-color: ${props => props.theme.colors.text};
+  font-family: ${props => props.theme.fonts.headline};
+  font-weight: ${props => props.theme.fontWeights.strong};
+  border-radius: 2px;
+  padding: 0.5rem 1rem;
+  display: block;
+  margin: 0 auto;
+  @media ${props => props.theme.screenSizes.tablet} {
+    display: none;
+  }
+`
+
 const FilterWrapper = styled.div`
-  border-bottom: ${props => `solid 1px ${props.theme.colors.text}`};
-  padding: 0 0 2rem 0;
+  border: ${props => `solid 2px ${props.theme.colors.text}`};
+  border-radius: 2px;
+  padding: 1rem 0;
+  text-align: center;
+  display: ${props => (props.filterVisible ? "block" : "none")};
   h3 {
     margin: 0;
-    margin-right: 1rem;
-    font-family: ${props => props.theme.fonts.sansSerif};
-    font-weight: ${props => props.theme.fontWeights.normal};
+    margin-bottom: 0.5rem;
+    /* font-family: ${props => props.theme.fonts.sansSerif}; */
+    /* font-size: ${props => props.theme.fontSizes[3]}; */
+    /* font-weight: ${props => props.theme.fontWeights.normal}; */
   }
   ul {
     list-style: none;
@@ -45,13 +63,14 @@ const FilterWrapper = styled.div`
     flex-direction: column;
     flex-wrap: wrap;
     align-items: center;
+    justify-content: center;
     li {
-      margin: 0 0 1.5rem 0;
+      margin: 1rem 0.5rem;
       padding: 0;
     }
   }
   @media ${props => props.theme.screenSizes.tablet} {
-    padding: 1rem 0 1.5rem 0;
+    display: block;
     ul {
       flex-direction: row;
     }
@@ -84,6 +103,7 @@ const FilterTag = styled.span`
 
 const IndexPage = ({ data }) => {
   const [activeTags, setActiveTags] = useState([])
+  const [filterVisible, toggleFilterVisible] = useState(false)
   return (
     <Layout>
       <SEO
@@ -96,15 +116,16 @@ const IndexPage = ({ data }) => {
       <ListingsContainer>
         <IntroTitle>Toronto Coffee Roasters</IntroTitle>
         <IntroText>
-          Do you miss your favourite local cafe? Many Toronto-area coffee
-          roasters are still selling beans, with options for contactless pickup
-          or shipping directly to your home.
+        Are you missing your favourite local cafe? Many independent Toronto coffee roasters are still operating, now with options for contactless pickup or shipping directly to your home. It’s a great way to support local businesses and add a little variety to your day.
         </IntroText>
-        <FilterWrapper>
+        {!filterVisible && (
+          <ToggleFilterButton onClick={() => toggleFilterVisible(true)}>
+            Show Shipping Filters
+          </ToggleFilterButton>
+        )}
+        <FilterWrapper filterVisible={filterVisible}>
+          <h3>Shipping Filters</h3>
           <ul>
-            <li>
-              <h3>Filters</h3>
-            </li>
             <li>
               <FilterTag
                 className={activeTags.includes("Delivery") ? "activeTag" : null}
