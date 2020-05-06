@@ -25,6 +25,7 @@ const IntroTitle = styled.h1`
 
 const BodyCopy = styled.p`
   font-size: ${props => props.theme.fontSizes[3]};
+  font-weight: ${props => props.theme.fontWeights.light};
   margin: 2rem 0;
 
   a {

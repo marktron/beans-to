@@ -58,6 +58,7 @@ const StyledLogo = styled.span`
 
 const Footer = styled.div`
   margin: 1rem;
+  font-weight: ${props => props.theme.fontWeights.light};
   font-size: ${props => props.theme.fontSizes[2]};
   opacity: 0.75;
   z-index: 3;

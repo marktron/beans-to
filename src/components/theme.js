@@ -35,12 +35,10 @@ const colors = {
       "rgb(204,202,200)"
     ],
     background: "rgb(27,25,24)",
-    text: "rgb(233,233,233)",
-    textMuted: "rgba(233,233,233, 0.75)",
-    headlines: "rgb(233,233,233)",
+    text: "rgb(220,220,220)",
+    textMuted: "rgba(220,220,220, 0.75)",
+    headlines: "rgb(220,220,220)",
     linkColor: "rgb(167,165,165)",
-    // linkUnderlineColor: "rgba(9,179,179,0.33)",
-    // modalBackground: "rgb(51,51,51)"
   }
 };
 const size = {
@@ -63,7 +61,7 @@ const screenSizes = {
   desktopL: `(min-width: ${size.desktop})`
 };
 const fonts = {
-  sansSerif: "aktiv-grotesk-condensed, Helvetica, Arial, sans-serif",
+  sansSerif: "aktiv-grotesk, Helvetica, Arial, sans-serif",
   serif: 'Georgia, Times, "Times New Roman", serif',
   monoSpace: 'Consolas, monaco, monospace',
   headline: 'aktiv-grotesk, sans-serif'
@@ -81,7 +79,7 @@ const fontSizes = [
 ];
 
 const fontWeights = {
-  light: "400",
+  light: "300",
   normal: "400",
   bold: "800",
   black: "800"
