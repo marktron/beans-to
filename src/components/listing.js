@@ -75,18 +75,13 @@ const ListingHeader = styled.h3`
 const Name = styled.a`
   color: ${props => props.theme.colors.text};
   line-height: 1;
+  border-bottom: ${props =>
+    `solid 1px ${chroma(props.theme.colors.linkColor).alpha(0)}`};
+  transition: border-color 0.2s ease, color 0.2s ease;
   @media ${props => props.theme.screenSizes.tablet} {
-    &::after {
-      content: "";
-      opacity: 0;
-      margin-left: 0.5rem;
-      transition: opacity 0.2s ease;
-    }
     &:hover {
-      &::after {
-        content: "⟶";
-        opacity: 1;
-      }
+      color: #fff;
+      border-bottom: ${props => `solid 1px ${props.theme.colors.linkColor}`};
     }
   }
 `
@@ -137,7 +132,7 @@ const Listing = props => {
             <SocialLinks business={business} />
           </SocialLinksWrapper>
         </ListingHeader>
-        {business.note?.note && (<Note>{business.note.note}</Note>)}
+        {business.note?.note && <Note>{business.note.note}</Note>}
         {business.address && (
           <Address
             href={`https://www.google.ca/maps/place/${encodeURI(
